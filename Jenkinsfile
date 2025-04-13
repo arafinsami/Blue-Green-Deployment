@@ -8,6 +8,7 @@ pipeline {
         IMAGE_NAME = "samiularafin/bankapp"
         TAG = "${params.DOCKER_TAG}"
         SCANNER_HOME= tool 'sonar-scanner'
+        KUBE_NAMESPACE = 'webapps'
     }
     
     parameters {
