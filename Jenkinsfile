@@ -129,23 +129,6 @@ pipeline {
             }
         }
         
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    def deploymentFile = ""
-                    if (params.DEPLOY_ENV == 'blue') {
-                        deploymentFile = 'app-deployment-blue.yml'
-                    } else {
-                        deploymentFile = 'app-deployment-green.yml'
-                    }
-
-                    withKubeConfig(caCertificate: '', clusterName: 'devopsshack-cluster', contextName: '', credentialsId: 'k8s-token', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://5C97A2895D55A65D340AEC42E0C5E93F.sk1.us-east-1.eks.amazonaws.com') {
-                        sh "kubectl apply -f ${deploymentFile} -n ${KUBE_NAMESPACE}"
-                    }
-                }
-            }
-        }
-        
         stage('Switch Traffic Between Blue & Green Environment') {
             when {
                 expression { return params.SWITCH_TRAFFIC }
