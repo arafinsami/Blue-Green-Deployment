@@ -1,0 +1,19 @@
+ubuntu@ip-10-0-1-54:~$ kubectl get all -n webapps
+NAME                                 READY   STATUS    RESTARTS        AGE
+pod/bankapp-blue-6d68dcc49d-nw8vq    1/1     Running   1 (8m29s ago)   8m50s
+pod/bankapp-green-64f67bc88b-8hgc7   1/1     Running   0               62s
+pod/mysql-879666b5c-cp8qp            1/1     Running   0               8m52s
+
+NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)        AGE
+service/bankapp-service   LoadBalancer   172.20.200.170   aa7855211db7f441d970fb38ba65d7c8-2057183225.us-east-1.elb.amazonaws.com   80:32093/TCP   8m51s
+service/mysql-service     ClusterIP      172.20.177.63    <none>                                                                    3306/TCP       8m52s
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/bankapp-blue    1/1     1            1           8m50s
+deployment.apps/bankapp-green   1/1     1            1           62s
+deployment.apps/mysql           1/1     1            1           8m52s
+
+NAME                                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/bankapp-blue-6d68dcc49d    1         1         1       8m50s
+replicaset.apps/bankapp-green-64f67bc88b   1         1         1       62s
+replicaset.apps/mysql-879666b5c            1         1         1       8m52s
